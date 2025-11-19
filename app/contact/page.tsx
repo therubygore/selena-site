@@ -11,8 +11,11 @@ export default function Contact() {
         if ("undefined" != typeof (window as any).Tally) {
           (window as any).Tally.loadEmbeds();
         } else {
-          document.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((e: HTMLIFrameElement) => {
-            e.src = e.dataset.tallySrc || '';
+          document.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((e) => {
+            const iframe = e as HTMLIFrameElement;
+            if (iframe.dataset.tallySrc) {
+              iframe.src = iframe.dataset.tallySrc;
+            }
           });
         }
       };
